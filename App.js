@@ -7,11 +7,15 @@ import {
 import { Button } from "@react-navigation/elements";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import { globalStyles } from "./styles/styles";
+
 import HomeScreen from "./screens/home";
 import EventsScreen from "./screens/events";
 import SettingsScreen from "./screens/settings";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { fetchEvents } from "./services/events";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+console.log(fetchEvents());
 const MyTabs = createBottomTabNavigator({
   screens: {
     Home: HomeScreen,
@@ -21,7 +25,7 @@ const MyTabs = createBottomTabNavigator({
 
   screenOptions: {
     headerStyle: {
-      backgroundColor: "rgba(3, 154, 255, 1)", // header background
+      backgroundColor: "#039AFF", // header background
     },
     headerTintColor: "#fff", // header text & icons
   },
