@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import Card from "./card";
 import { fetchEvents } from "../services/events";
-import moment from "moment";
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
@@ -22,8 +21,8 @@ export default function EventsList() {
           <Card
             title={item.title}
             location={item.location}
-            time={moment(item.startTime, "HH:mm").format("h:mm A")}
-            date={moment(item.date, "YYYY-MM-DD").fromNow()}
+            time={item.startTime}
+            date={item.date}
             spotsRemaining={item.spotsRemaining}
           />
         )}
