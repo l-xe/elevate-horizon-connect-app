@@ -1,10 +1,4 @@
-export default function fetchEvents() {
-  return fetch("https://grmobile.onrender.com/events")
-    .then((response) => response.json())
-    .then((json) => {
-      return json;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+export async function fetchEvents() {
+  const response = await fetch("https://grmobile.onrender.com/events");
+  return response.json();
 }

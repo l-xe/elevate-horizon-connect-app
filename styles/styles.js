@@ -4,6 +4,9 @@ export const globalStyles = StyleSheet.create({
   header: {
     fontSize: 30,
   },
+  caption: {
+    color: "#7a7a7aff",
+  },
   screen: {
     backgroundColor: "#F2F4F7",
     flex: 1,

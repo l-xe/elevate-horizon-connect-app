@@ -1,20 +1,29 @@
-import { View, Text, FlatList } from "react-native";
+import { useEffect, useState } from "react";
+import { View, FlatList } from "react-native";
 import Card from "./card";
 import { fetchEvents } from "../services/events";
-
-const dummyData = fetchEvents();
+import moment from "moment";
 
 export default function EventsList() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetchEvents()
+      .then((data) => setEvents(data))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <View>
       <FlatList
-        data={dummyData}
+        data={events}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Card
             title={item.title}
             location={item.location}
-            endTime={item.endTime}
+            time={moment(item.startTime, "HH:mm").format("h:mm A")}
+            date={moment(item.date, "YYYY-MM-DD").fromNow()}
             spotsRemaining={item.spotsRemaining}
           />
         )}

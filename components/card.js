@@ -7,18 +7,14 @@ export default function Card(props) {
   return (
     <Pressable>
       <View style={globalStyles.card}>
-        <Text style={globalStyles.header}>{props.title}</Text>
-        <Text>
-          {new Date(props.endTime).toLocaleString("en-GB", {
-            day: "numeric",
-            month: "short",
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-          })}
+        <Text style={globalStyles.header}>
+          {props.title.replace("REMOTE", "")}
         </Text>
-        <Text>{props.location}</Text>
-        <Text>{props.spotsRemaining}</Text>
+        <Text style={globalStyles.caption}>
+          {props.time} {props.date}
+        </Text>
+        <Text style={globalStyles.caption}>{props.location}</Text>
+        <Text style={globalStyles.caption}>{props.spotsRemaining} going</Text>
       </View>
     </Pressable>
   );
