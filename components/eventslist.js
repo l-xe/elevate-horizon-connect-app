@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import Card from "./card";
 import { fetchEvents } from "../services/events";
+import { globalStyles } from "../styles/styles";
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
@@ -13,9 +14,10 @@ export default function EventsList() {
   }, []);
 
   return (
-    <View>
+    <View >
       <FlatList
         data={events}
+        
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Card

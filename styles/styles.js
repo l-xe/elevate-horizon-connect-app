@@ -7,6 +7,9 @@ export const globalStyles = StyleSheet.create({
   caption: {
     color: "#7a7a7aff",
   },
+  test1: {
+    backgroundColor: "#ff0000"
+  },
   screen: {
     backgroundColor: "#F2F4F7",
     flex: 1,

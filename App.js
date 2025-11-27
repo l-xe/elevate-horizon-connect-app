@@ -9,25 +9,41 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { globalStyles } from "./styles/styles";
 
-import HomeScreen from "./screens/home";
 import EventsScreen from "./screens/events";
 import SettingsScreen from "./screens/settings";
 
 import { fetchEvents } from "./services/events";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 console.log(fetchEvents());
+
 const MyTabs = createBottomTabNavigator({
+  screenOptions: ({ route }) => ({
+    tabBarIcon: ({ color, size }) => {
+      let iconName;
+
+      if (route.name === 'Events') {
+        iconName = "calendar"
+      } else if (route.name === 'Settings') {
+        iconName = "settings"
+      }
+
+      return <Ionicons name={iconName} size={size} color={color} />;
+    },
+    tabBarActiveTintColor: 'tomato',
+    tabBarInactiveTintColor: 'gray',
+    headerStyle: {
+      backgroundColor: "#28a9ffff",
+    },
+    headerTitleStyle: {
+      color: "#ffffff"
+    }
+
+  }),
   screens: {
-    Home: HomeScreen,
     Events: EventsScreen,
     Settings: SettingsScreen,
-  },
-
-  screenOptions: {
-    headerStyle: {
-      backgroundColor: "#039AFF", // header background
-    },
-    headerTintColor: "#fff", // header text & icons
   },
 });
 
@@ -35,7 +51,7 @@ const Navigation = createStaticNavigation(MyTabs);
 
 export default function App() {
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider >
       <Navigation />
     </SafeAreaProvider>
   );
