@@ -17,7 +17,6 @@ export const globalStyles = StyleSheet.create({
   card: {
     backgroundColor: "white",
     padding: 16,
-    marginHorizontal: 16,
     marginVertical: 8,
     borderRadius: 12,
     shadowColor: "#000",

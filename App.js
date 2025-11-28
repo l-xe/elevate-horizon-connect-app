@@ -16,8 +16,6 @@ import { fetchEvents } from "./services/events";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-console.log(fetchEvents());
-
 const MyTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => ({
     tabBarIcon: ({ color, size }) => {
