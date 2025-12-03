@@ -3,12 +3,14 @@ import { View, Text, FlatList, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { fetchEvents } from "../services/events";
 import Card from "../components/card";
+import { useAppSettings } from "../context/AppContext";
 
 export default function EventsScreen() {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { isDarkMode, textSize } = useAppSettings();
 
   useEffect(() => {
     loadEvents();
@@ -43,6 +45,9 @@ export default function EventsScreen() {
     }
   };
 
+  const bgColor = isDarkMode ? "#1a1a1a" : "#fff";
+  const textColor = isDarkMode ? "#fff" : "#000";
+
   const renderEvent = ({ item }) => (
     <Card
       title={item.title}
@@ -54,7 +59,7 @@ export default function EventsScreen() {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: bgColor }]}>
       <View style={styles.categoriesRow}>
         {categories.map((cat) => (
           <Button
@@ -64,6 +69,7 @@ export default function EventsScreen() {
             style={styles.categoryBtn}
             onPress={() => filterByCategory(cat)}
             key={cat}
+            labelStyle={{ fontSize: 12 * textSize }}
           >
             {cat}
           </Button>
@@ -79,11 +85,42 @@ export default function EventsScreen() {
   );
 }
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 16,
+//     backgroundColor: "#fff",
+//   },
+//   categoriesRow: {
+//     flexDirection: "row",
+//     flexWrap: "wrap",
+//     marginBottom: 12,
+//     gap: 4,
+//   },
+//   categoryBtn: {
+//     margin: 2,
+//     color: "#000",
+//   },
+//   card: {
+//     backgroundColor: "#f7f7f7",
+//     padding: 12,
+//     borderRadius: 10,
+//     marginBottom: 10,
+//   },
+//   title: {
+//     fontWeight: "bold",
+//     fontSize: 16,
+//   },
+//   categoryTag: {
+//     marginTop: 5,
+//     fontStyle: "italic",
+//     color: "#555",
+//   },
+// });
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#fff",
   },
   categoriesRow: {
     flexDirection: "row",
@@ -93,21 +130,15 @@ const styles = StyleSheet.create({
   },
   categoryBtn: {
     margin: 2,
-    color: "#000",
   },
-  card: {
-    backgroundColor: "#f7f7f7",
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 10,
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 40,
   },
-  title: {
-    fontWeight: "bold",
+  emptyText: {
     fontSize: 16,
-  },
-  categoryTag: {
-    marginTop: 5,
-    fontStyle: "italic",
-    color: "#555",
+    textAlign: "center",
   },
 });
