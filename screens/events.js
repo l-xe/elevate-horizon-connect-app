@@ -21,14 +21,12 @@ export default function EventsScreen() {
       setEvents(data);
       setFilteredEvents(data);
 
-      // Extract unique categories
       const uniqueCategories = [
         "All",
         ...Array.from(new Set(data.map((event) => event.category))),
       ];
 
       setCategories(uniqueCategories);
-
     } catch (error) {
       console.error("Error fetching events:", error);
     }
@@ -46,7 +44,7 @@ export default function EventsScreen() {
   };
 
   const renderEvent = ({ item }) => (
-    <Card 
+    <Card
       title={item.title}
       location={item.location}
       spotsRemaining={item.spotsRemaining}
@@ -57,18 +55,18 @@ export default function EventsScreen() {
 
   return (
     <View style={styles.container}>
-
       <View style={styles.categoriesRow}>
         {categories.map((cat) => (
-        <Button
-          mode={selectedCategory === cat ? "contained" : "outlined"}
-          buttonColor={selectedCategory === cat ? "#28a9ffff" : undefined}
-          textColor={selectedCategory === cat ? "#FFFFFF" : "#28a9ffff"}
-          style={styles.categoryBtn}
-          onPress={() => filterByCategory(cat)}
-        >
-          {cat}
-        </Button>
+          <Button
+            mode={selectedCategory === cat ? "contained" : "outlined"}
+            buttonColor={selectedCategory === cat ? "#28a9ffff" : undefined}
+            textColor={selectedCategory === cat ? "#FFFFFF" : "#28a9ffff"}
+            style={styles.categoryBtn}
+            onPress={() => filterByCategory(cat)}
+            key={cat}
+          >
+            {cat}
+          </Button>
         ))}
       </View>
 
@@ -77,7 +75,6 @@ export default function EventsScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderEvent}
       />
-
     </View>
   );
 }
@@ -96,7 +93,7 @@ const styles = StyleSheet.create({
   },
   categoryBtn: {
     margin: 2,
-    color: "#000"
+    color: "#000",
   },
   card: {
     backgroundColor: "#f7f7f7",
