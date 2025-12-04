@@ -8,7 +8,7 @@ export const globalStyles = StyleSheet.create({
     color: "#7a7a7aff",
   },
   test1: {
-    backgroundColor: "#ff0000"
+    backgroundColor: "#ff0000",
   },
   screen: {
     backgroundColor: "#F2F4F7",

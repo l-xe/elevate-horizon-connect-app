@@ -22,7 +22,13 @@ export default function SettingsScreen() {
   const secondaryTextColor = isDarkMode ? "#bbb" : "#7a7a7a";
 
   const fontSizeLabel =
-    textSize === 1 ? "Normal" : textSize === 1.2 ? "Large" : "Extra Large";
+    textSize === 1
+      ? "Small"
+      : textSize === 1.1
+      ? "Default"
+      : textSize === 1.2
+      ? "Large"
+      : "Extra Large";
 
   return (
     <ScrollView
@@ -69,10 +75,17 @@ export default function SettingsScreen() {
               value={textSize}
               onValueChange={setTextSize}
               minimumValue={1}
-              maximumValue={1.4}
+              maximumValue={1.3}
               step={0.1}
               minimumTrackTintColor="#3CA6E5"
               maximumTrackTintColor={isDarkMode ? "#444" : "#ddd"}
+              // StepMarker={(props) => {
+              //   return (
+              //     <View>
+              //       <Text>{props.index}</Text>
+              //     </View>
+              //   );
+              // }}
             />
             <Text
               style={[

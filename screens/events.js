@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, RefreshControl } from "react-native";
 import { Button } from "react-native-paper";
 import { fetchEvents } from "../services/events.js";
 import Card from "../components/card.js";
@@ -13,6 +13,7 @@ export default function EventsScreen() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const { isDarkMode, textSize } = useAppSettings();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadEvents();
@@ -24,10 +25,12 @@ export default function EventsScreen() {
 
   const loadEvents = async () => {
     try {
+      setLoading(true);
       const data = await fetchEvents();
 
       setEvents(data);
       setFilteredEvents(data);
+      setLoading(false);
 
       const uniqueCategories = [
         "All",
@@ -116,6 +119,9 @@ export default function EventsScreen() {
               No events found
             </Text>
           </View>
+        }
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={loadEvents} />
         }
       />
     </View>
