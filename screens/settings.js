@@ -1,6 +1,6 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "@react-navigation/elements";
+import { Button} from "@react-navigation/elements";
 import { useAppSettings } from "../context/AppContext";
 import { Switch } from "react-native-paper";
 import Slider from "@react-native-community/slider";
@@ -160,6 +160,9 @@ export default function SettingsScreen() {
             { backgroundColor: secondaryBg, borderRadius: 12 },
           ]}
         >
+          <Image
+            source={require('../assets/Logo.jpg')}
+          ></Image>
           <Text
             style={[
               styles.infoText,
